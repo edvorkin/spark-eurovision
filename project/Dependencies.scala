@@ -1,17 +1,20 @@
 import sbt._
 
 object Version {
-  val spark        = "0.9.1"
-  val hadoop       = "2.4.0"
+  val spark        = "1.3.1"
+  val hadoop       = "2.7.0"
   val slf4j        = "1.7.6"
   val logback      = "1.1.1"
-  val scalaTest    = "2.1.0"
+  val scalaTest    = "2.2.5"
   val mockito      = "1.9.5"
+
 }
 
 object Library {
   val sparkCore      = "org.apache.spark"  %% "spark-core"      % Version.spark
-  val hadoopClient   = "org.apache.hadoop" %  "hadoop-client"   % Version.hadoop
+  val sparkGraphX    = "org.apache.spark" %% "spark-graphx" % Version.spark
+
+  val hadoopClient   = "org.apache.hadoop" %  "hadoop-client"   % Version.hadoop excludeAll ExclusionRule(organization = "javax.servlet")
   val slf4jApi       = "org.slf4j"         %  "slf4j-api"       % Version.slf4j
   val logbackClassic = "ch.qos.logback"    %  "logback-classic" % Version.logback
   val scalaTest      = "org.scalatest"     %% "scalatest"       % Version.scalaTest
@@ -24,6 +27,7 @@ object Dependencies {
 
   val sparkHadoop = Seq(
     sparkCore,
+    sparkGraphX,
     hadoopClient,
     logbackClassic % "test",
     scalaTest % "test",
